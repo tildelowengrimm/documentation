@@ -513,6 +513,24 @@ Note also that key is only as secure as the least safe place that you have it ba
 
 Now that the keys are safely exported and backed up, we're going to mutilate them a little so that the version copied to your everyday computer is as innocuous as possible.
 
+## Generate a Revocation Certificate
+
+You should at this point generate a revocation certificate for your master key. This is for the case where something bad happens to your master key before it expires; for instance, you lose the passphrase or someone gets ahold of your private key. A revocation certificate is generated using yourmaster private key and kept to yourself until the day disaster strikes. When that happens, you can publish the revocation certificate to let the world know that your public key should no longer be used.   
+
+Because an attacker who gets ahold of your revocation certificate can publish it and render your key useless, you should keep it safe. Let's do the following: 
+
+`amnesia@tails:~$ gpg --output /media/cold-storage/ada-revoke.gpg --gen-revoke CDCD72AF`
+
+Note that we don't need to generate a revocation certificate for each of the subkeys, because as long as we have the private part of the master key, we can go into the key editor, select the compromised subkey, and issue the `revkey` command.
+
+When the time comes to revoke the compromised master key, do the following:
+
+~~~~~
+amnesia@tails:~$ gpg --import /media/cold-storage/ada-revoke.gpg
+amnesia@tails:~$ gpg --keyserver pgp.mit.edu --send CDCD72AF
+~~~~~
+
+where pgp.mit.edu can be replaced with any keyserver of your choosing.
 
 ## Smartcards
 
