@@ -291,7 +291,7 @@ We have a master key with the `Certify` capability, now it's time to to generate
 
 `amnesia@tails:~$ gpg --expert --edit-key CDCD72AF`
 
-That string of eight letters and numbers is the *key ID*, a short way to refer to this master key, all it's UIDs, signatures, any subkeys, or other stuff it might pick up over time. It's the last eight character of the key's fingerprint, which GPG just told you when you were don't generating you key.
+That string of eight letters and numbers is the *key ID*, a short way to refer to this master key, all it's UIDs, signatures, any subkeys, or other stuff it might pick up over time. It's the last eight character of the key's fingerprint, which GPG just told you when it completed generating your key.
 
 ~~~~~
 gpg (GnuPG) 1.4.12; Copyright (C) 2012 Free Software Foundation, Inc.
