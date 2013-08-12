@@ -780,7 +780,7 @@ This is the file that you'll import on your everyday machine.
 
 We're done with key generation now. If you've been following through all the steps, you probably have four USB thumb drives and one smartcard/reader.
 
-* Cold storage for your master key and all your subkeys. Put this on your home safe or your piggy bank, or wherever you keep things safely at home.
+* Cold storage for your master key and all your subkeys. Put this in your home safe or your piggy bank, or wherever you keep things safely at home.
 * Two backups of your cold storage. Take these and put them somewhere safe. Give one to a friend who lives far away. Put another somewhere safe outside your home.
 * A thumb drive destined for your everyday computer, with public parts of your keys.
 * A smartcard containing the public and private parts of all of your subkeys.
