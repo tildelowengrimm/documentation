@@ -579,7 +579,7 @@ Q - quit
 Your selection? 
 ~~~~~
 
-The admin PIN is used to make changes to the card, while the user PIN actually lets to tell the card to decrypt or sign things using the onboard keys. If you (or some malicious outsider) enters the user PIN wrong three times, the card is locked, and the Admin PIN is needed to unlock it. If you use a GSM cellphone, this is somewhat like your SIM card's PIN and PUK codes. Entering an incorrect admin PIN three times destroys the card. You probably want to avoid that.
+The admin PIN is used to make changes to the card, while the user PIN actually lets the card decrypt or sign things using the onboard keys. If you (or some malicious outsider) enters the user PIN wrong three times, the card is locked, and the Admin PIN is needed to unlock it. If you use a GSM cellphone, this is somewhat like your SIM card's PIN and PUK codes. Entering an incorrect admin PIN three times destroys the card. You probably want to avoid that.
 
 The admin PIN isn't used every day, and you only need it to reconfigure the card or fix it if you mess up your PIN. It doesn't need to be something you can remember, just find when all else fails. It's probably a good idea to use the longest admin PIN your card accepts (in this example, 32 digits long). You should probably write the admin PIN down a text file on your master key cold storage and backup disks.
 
