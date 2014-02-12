@@ -54,9 +54,9 @@ Cryptography is only a secure as the computer that's running it. If your private
 
 However, you do need to use *a* computer to generate your keys; you'll also need to load your keys on a computer whenever you certify other people's keys or change subkeys or UIDs; and you might need to use a computer to recover if something goes wrong. For these higher-stakes operations, it's worthwhile to use a computer which is as secure as possible, even if that means that your more-secure computer is a little harder to use.
 
-Securing a computer is difficult, *really* difficult. The more secure you want a computer to be, the more work it'll be to set that up, and -- probably -- the fewer features that computer will have, and the harder it'll be to use. The amount of work you want to spend securing a computer depends on who you think might be trying to get at your keys, and how capable, organized, and powerful they are.
+Securing a computer is difficult, *really* difficult. The more secure you want a computer to be, the more work it'll be to set that up, and -- probably -- the fewer features that computer will have and the harder it'll be to use. The amount of work you want to spend securing a computer depends on who you think might be trying to get at your keys, and how capable, organized, and powerful they are.
 
-[Threat Modeling](#threat-modeling) is the process of thinking about what attacks you might expect and how much work you want to spend mitigating it. Once you've thought about your threat model, [Securing a Computer](#securing-a-computer) talks about some approaches you can take to make a computer harder to compromise. From now on, this guide just talks about your "*secure computer*", whatever that means to you.
+[Threat Modeling](#threat-modeling) is the process of thinking about what attacks you might expect and how much work you want to spend mitigating those attacks. Once you've thought about your threat model, [Securing a Computer](#securing-a-computer) talks about some approaches you can take to make a computer harder to compromise. From now on, this guide just talks about your "*secure computer*", whatever that means to you.
 
 ### Getting Started
 
