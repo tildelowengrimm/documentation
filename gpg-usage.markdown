@@ -291,7 +291,7 @@ We have a master key with the `Certify` capability, now it's time to to generate
 
 `amnesia@tails:~$ gpg --expert --edit-key CDCD72AF`
 
-That string of eight letters and numbers is the *key ID*, a short way to refer to this master key, all it's UIDs, signatures, any subkeys, or other stuff it might pick up over time. It's the last eight character of the key's fingerprint, which GPG just told you when you were don't generating you key.
+That string of eight letters and numbers is the *key ID*, a short way to refer to this master key, all it's UIDs, signatures, any subkeys, or other stuff it might pick up over time. It's the last eight character of the key's fingerprint, which GPG just told you when it completed generating your key.
 
 ~~~~~
 gpg (GnuPG) 1.4.12; Copyright (C) 2012 Free Software Foundation, Inc.
@@ -579,7 +579,7 @@ Q - quit
 Your selection? 
 ~~~~~
 
-The admin PIN is used to make changes to the card, while the user PIN actually lets to tell the card to decrypt or sign things using the onboard keys. If you (or some malicious outsider) enters the user PIN wrong three times, the card is locked, and the Admin PIN is needed to unlock it. If you use a GSM cellphone, this is somewhat like your SIM card's PIN and PUK codes. Entering an incorrect admin PIN three times destroys the card. You probably want to avoid that.
+The admin PIN is used to make changes to the card, while the user PIN actually lets the card decrypt or sign things using the onboard keys. If you (or some malicious outsider) enters the user PIN wrong three times, the card is locked, and the Admin PIN is needed to unlock it. If you use a GSM cellphone, this is somewhat like your SIM card's PIN and PUK codes. Entering an incorrect admin PIN three times destroys the card. You probably want to avoid that.
 
 The admin PIN isn't used every day, and you only need it to reconfigure the card or fix it if you mess up your PIN. It doesn't need to be something you can remember, just find when all else fails. It's probably a good idea to use the longest admin PIN your card accepts (in this example, 32 digits long). You should probably write the admin PIN down a text file on your master key cold storage and backup disks.
 
@@ -780,7 +780,7 @@ This is the file that you'll import on your everyday machine.
 
 We're done with key generation now. If you've been following through all the steps, you probably have four USB thumb drives and one smartcard/reader.
 
-* Cold storage for your master key and all your subkeys. Put this on your home safe or your piggy bank, or wherever you keep things safely at home.
+* Cold storage for your master key and all your subkeys. Put this in your home safe or your piggy bank, or wherever you keep things safely at home.
 * Two backups of your cold storage. Take these and put them somewhere safe. Give one to a friend who lives far away. Put another somewhere safe outside your home.
 * A thumb drive destined for your everyday computer, with public parts of your keys.
 * A smartcard containing the public and private parts of all of your subkeys.
