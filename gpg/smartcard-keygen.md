@@ -329,14 +329,14 @@ Okay, now you've probably exported your key to some safe cold-storage. I say *pr
 If you're using something like TAILS, rebooting is a great idea, but remember to edit your `gpg.conf` again after you boot back up. Once you've rebooted, try to re-import the master key from that backup you just made.
 
 ~~~~
-amnesia@amnesia:~$ gpg --import /media/cold-storage/ada-master_private.gpg
+amnesia@amnesia:~$ gpg --import /media/cold-storage/ada-master_public.gpg
 gpg: key CDCD72AF: public key "Ada Lovelace <ada@enchantressofnumbers.net>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1  (RSA: 1)
 ~~~~
 
 ~~~~
-amnesia@amnesia:~$ gpg --import /media/cold-storage/ada-master_public.gpg
+amnesia@amnesia:~$ gpg --import /media/cold-storage/ada-master_private.gpg
 gpg: key CDCD72AF: secret key imported
 gpg: key CDCD72AF: public key "Ada Lovelace <ada@enchantressofnumbers.net>" not changed
 gpg: Total number processed: 1
