@@ -11,17 +11,17 @@ Caveats
 
 As with many things, this guide has limitations.
 
-The author is a Debian user, so all the specific instructions are based on Debian 7.x. If you use a different version of Debian or Debian-like OS such as Ubuntu or Mint, things might just work for you unchanged. If you’re an OSX user you might need to change something here or there. Unfortunately, the author is not able to provide advice for Windows.
+The author is a Debian user, so all the specific instructions are based on Debian 7.x. If you use a different version of Debian or Debian-like OS such as Ubuntu or Mint, things might just work for you unchanged. If you’re an OS X user you might need to change something here or there. Unfortunately, the author is not able to provide advice for Windows.
 
 This guide is targeted at a technically experienced user. It focuses on use of the terminal, not on graphical applications. Sadly, this makes it inaccessible to a lot of people. At the time of writing, GPG is not a very user-friendly piece of software, and there aren't many graphical frontends which both work well and support the advanced usage scenario described in this guide. If you find an application which works and is compatible with this guide, please get in touch: the author would love to hear from you!
 
-If you try this guide and it doesn’t work for you, please email the author and tell them what broke! If you use OSX or Windows, you are invited to port this guide for your OS, and to let the author know what the right instructions are for you.
+If you try this guide and it doesn’t work for you, please email the author and tell them what broke! If you use OS X or Windows, you are invited to port this guide for your OS, and to let the author know what the right instructions are for you.
 
 
 License
 -------
 
-The license for this work is [Creative Commons Attributuion-ShareAlike-3.0 USA](
+The license for this work is [Creative Commons Attribution-ShareAlike-3.0 USA](
 https://creativecommons.org/licenses/by-sa/3.0/us). You are welcome to re-use it under that license, but the author requests that you send changes upstream by email or pull request rather than forking outright.
 
 
@@ -55,7 +55,7 @@ You may want to get some things ready before following this guide. To follow all
 Environment/Preparation
 -----------------------
 
-Cryptography is only a secure as the computer that's running it. If your private keys are stored on a computer which is compromised, the attacker can decrypt your messages, make valid signatures, or impersonate you. One of the goals of the setup described here is that you never end up showing your private keys to your everyday computer. Even if your everyday computer is compromised, an attacker won't get your private keys.
+Cryptography is only as secure as the computer that's running it. If your private keys are stored on a computer which is compromised, the attacker can decrypt your messages, make valid signatures, or impersonate you. One of the goals of the setup described here is that you never end up showing your private keys to your everyday computer. Even if your everyday computer is compromised, an attacker won't get your private keys.
 
 However, you do need to use *a* computer to generate your keys and you might need to use a computer to recover if something goes wrong. For these higher-stakes operations, it's worthwhile to use a computer which is as secure as possible, even if that means that your more-secure computer is a little harder to use.
 
@@ -68,7 +68,7 @@ Getting Started
 
 Boot up your *secure computer*. Turn off any network connections, unplug any non-vital peripherals and check that nobody is watching over your shoulder: it's time to make some keys.
 
-**A note on entropy.** Really good random numbers are needed to generate keys securely. We're not talking *kinda unpredictable*, we're talking about all-natural, organic, shade-grown, entropy. If you don't have good entropy, someone else might be able to guess your key, and that'd be *really bad*. If you have one, now is the time to set up your hardware random number generator. If not, you probably don't need to worry: key generation will just take a little longer while your computer gathers entropy. If you're using a virtual machine, or another prefab environment you should definitely worry about this
+**A note on entropy.** Really good random numbers are needed to generate keys securely. We're not talking *kinda unpredictable*, we're talking about all-natural, organic, shade-grown  entropy. If you don't have good entropy, someone else might be able to guess your key, and that'd be *really bad*. If you have one, now is the time to set up your hardware random number generator. If not, you probably don't need to worry: key generation will just take a little longer while your computer gathers entropy. If you're using a virtual machine, or another prefab environment you should definitely worry about this.
 
 Okay, grab yourself your favorite terminal. Let's get started. 
 
@@ -171,7 +171,7 @@ RSA keys may be between 1024 and 4096 bits long.
 What keysize do you want? (2048)
 ~~~~~
 
-GPG's suggested default is 2048 bits. With crypto keys, bigger is always more secure, so your gut reaction should be to pick 4096 bits. Unfortunately, may smartcards don't support keys larger than 3072 bits, so let's pick that size. There's no very good reason for that particular limit, but that's definitely what it is.
+GPG's suggested default is 2048 bits. With crypto keys, bigger is always more secure, so your gut reaction should be to pick 4096 bits. Unfortunately, many smartcards don't support keys larger than 3072 bits, so let's pick that size. There's no very good reason for that particular limit, but that's definitely what it is.
 
 You may be wondering why we're going to all this trouble to generate this key on a computer rather than on the smartcard itself. If we generate the key on a computer first, then we can keep a backup on removable media. If your smart card later gets left on a bus or run over by one, you have a backup. You can copy it to a new smartcard and pick up where you left off.
 
@@ -196,19 +196,19 @@ Key is valid for? (0)
 
 "Author," -- you might be thinking -- "this is a pretty involved process, and I don't want to do it very often. Why would I want my key to expire." Good question, hypothetical straw-person reader. You're quite right: it really would be better if this key never expires. But even as we hope for the best, we should prepare for the worst.
 
-Imagine some hypothetical future you. You use your key all the time, and loads of folks rely on it. Then: disaster strikes! You are attacked by a ninja clan, who (mistakenly?) think that you're a pirate sympathizer. They destroy all your computers, all your backups, everything. For good measure, they thwack you on the head and make you forget all your passwords and other secret plans. Now you have a problem: you've lost you key, but it's still valid. Other people might even send you encrypted messages or expect you to sign or authenticate things with it. Even if you create a new key, there's nothing to stop some poor confused soul from using your old, destroyed key by accident. Oh dear.
+Imagine some hypothetical future you. You use your key all the time, and loads of folks rely on it. Then: disaster strikes! You are attacked by a ninja clan, who (mistakenly?) think that you're a pirate sympathizer. They destroy all your computers, all your backups, everything. For good measure, they thwack you on the head and make you forget all your passwords and other secret plans. Now you have a problem: you've lost your key, but it's still valid. Other people might even send you encrypted messages or expect you to sign or authenticate things with it. Even if you create a new key, there's nothing to stop some poor confused soul from using your old, destroyed key by accident. Oh dear.
 
-We're going to use expiration in an attempt to stave off this dire scenario, sort of like a dead-person's switch. When you set an expiry date on you key, in the event of scenario NINJA OBLIVION OMEGA, eventually the lost key will expire and people will stop trying to use it. However, in the RAINBOWS BUTTERFLIES UNICORNS situation, you're fine. If you still control the key, then you can always postpone the expiry date, even if it's already passed. Eerie, perhaps but useful.
+We're going to use expiration in an attempt to stave off this dire scenario, sort of like a dead-person's switch. When you set an expiry date on your key, in the event of scenario NINJA OBLIVION OMEGA, eventually the lost key will expire and people will stop trying to use it. However, in the RAINBOWS BUTTERFLIES UNICORNS situation, you're fine. If you still control the key, then you can always postpone the expiry date, even if it's already passed. Eerie, perhaps— but useful.
 
-With all that in mind, pick a time. The longer the time is, the longer someone might accidentally use a lost key. The shorter the time, the more frequently you'll have to get out your master-key smartcard and and push back the clock. Remember your threat model? Let it guide you.
+With all that in mind, pick a time. The longer the time is, the longer someone might accidentally use a lost key. The shorter the time, the more frequently you'll have to get out your master-key smartcard and push back the clock. Remember your threat model? Let it guide you.
 
 **Keyserverless usage note.** If you don't want to use keyservers, remember that you still have to distribute your key after you change its expiry date. If that's going to be especially difficult for you, consider that when picking a time.
 
-For most folks, a six months is a perfectly reasonable period.
+For most folks, six months is a perfectly reasonable period.
 
 ~~~~~
 Key is valid for? (0) 6m
-Key expires at 06 Apr 2064 07:22:28 PM CST
+Key expires at 06 Oct 2063 07:22:28 PM CST
 Is this correct? (y/N) y
 ~~~~~
 
@@ -252,7 +252,7 @@ You need a Passphrase to protect your secret key.
 Enter passphrase:
 ~~~~~
 
-Your passphrase is used to encrypt your key when it's stored on disk. This prevents someone who gets access to your secret keyring from using your key. You want to pick a passphrase so incredibly complex that a nobody will ever guess it, even if they use a computer to try guessing words and combinations of words, and so on. You also want a passphrase so simple and memorable that you'll never forget it. That sounds pretty tough. This isn't a guide to passphrases. What's your threat model again? GPG won't echo your passphrase back as you type it.
+Your passphrase is used to encrypt your key when it's stored on disk. This prevents someone who gets access to your secret keyring from using your key. You want to pick a passphrase so incredibly complex that nobody will ever guess it, even if they use a computer to try guessing words and combinations of words, and so on. You also want a passphrase so simple and memorable that you'll never forget it. That sounds pretty tough. This isn't a guide to passphrases. What's your threat model again? GPG won't echo your passphrase back as you type it.
 
 
 Wait for Entropy
@@ -282,7 +282,7 @@ Ugh, a few more minutes. If we had a random number generator, this would be a lo
 
 ~~~~~
 ...+++++
-pub   3072R/CDCD72AF 2063-04-06 [expires: 2064-10-06]
+pub   3072R/CDCD72AF 2063-04-06 [expires: 2063-10-06]
       Key fingerprint = DDC6 93BF 8FC1 3036 36D2  CCFB 4771 324A CDCD 72AF
 uid                  Ada Lovelace <ada@enchantressofnumbers.net>
 
@@ -304,7 +304,7 @@ amnesia@amnesia:~$ gpg --armor --output /media/cold-storage/ada-master_private.g
 amnesia@amnesia:~$ gpg --armor --output /media/cold-storage/ada-master_public.gpg --export CDCD72AF
 ~~~~
 
-That string of eight letters and numbers at the end is the *key ID*, a short way to refer to this master key, all it's UIDs, signatures, any subkeys, or other stuff it might pick up over time. It's the last eight character of the key's fingerprint, which GPG just told you when it completed generating your key. Key IDs aren't securely unique, but that doesn't matter right now.
+That string of eight letters and numbers at the end is the *key ID*, a short way to refer to this master key, all its UIDs, signatures, any subkeys, or other stuff it might pick up over time. It's the last eight characters of the key's fingerprint, which GPG just told you when it completed generating your key. Key IDs aren't securely unique, but that doesn't matter right now.
 
 The `armor` signal tells GPG to write an "ASCII-armored" text file, rather than a binary one. The `output` parameter specifies the filename to save the keys to. The `export-secret-keys` command does just what it sounds like: it exports secret keys, but not the public parts. The regular `export` command only exports public keys, for your safety and convenience. Note that the GPG command always comes last, after all its flags and parameters. Just for safe keeping, let's make some backups.
 
@@ -322,7 +322,7 @@ The key is only as secure as the least safe place that you have it backed up. If
 Back off
 --------
 
-Okay, now you've probably exported your key to some safe cold-storage. I say *probably* because let's just make sure, eh? Delete your secret keyring and make sure you can get your keys back from the backups you just made
+Okay, now you've probably exported your key to some safe cold-storage. I say *probably* because let's just make sure, eh? Delete your secret keyring and make sure you can get your keys back from the backups you just made:
 
 `rm ~/.gnupg/secring.gpg`
 
@@ -355,9 +355,9 @@ Smartcards
 
 This next section is all about smartcards. Smartcards are designed to securely store cryptographic keys without ever revealing them. When you use a smartcard, all the crypto happens *on the card itself*. Your computer sends the smartcard a message like "Please decrypt this file." and the smartcard does the decryption and sends back the plaintext without ever revealing the secret key.
 
-Unfortunately, most smartcards and readers are proprietary. That means that it's really hard to audit them to ensure that they're truly secure and don't have any backdoors. It's totally plausible that some smarcards might have bugs that allow timing attacks, and perhaps some even have backdoors which *will* allow them to divulge the secret key.
+Unfortunately, most smartcards and readers are proprietary. That means that it's really hard to audit them to ensure that they're truly secure and don't have any backdoors. It's totally plausible that some smartcards might have bugs that allow timing attacks, and perhaps some even have backdoors which *will* allow them to divulge the secret key.
 
-For safety's sake, you might want to *assume* that your smartcard has a backdoor or vulnerability and treat it like a (less-secure) USB thumb drive. On the bright side, your card might actually be secure and give you an extra layer of insualtion against attackers!
+For safety's sake, you might want to *assume* that your smartcard has a backdoor or vulnerability and treat it like a (less-secure) USB thumb drive. On the bright side, your card might actually be secure and give you an extra layer of insulation against attackers!
 
 You can think long and hard about which smartcard you want, and who you trust to make them safely. For now, let's assume that you've picked a smartcard and reader, and have them ready to go. The GPG manual has [some instructions](http://www.gnupg.org/howtos/card-howto/en/smartcard-howto-single.html) for setting up your computer to use a smartcard and reader.
 
@@ -424,7 +424,7 @@ Your selection?
 
 The admin PIN is used to make changes to the card, while the user PIN actually lets the card decrypt or sign things using the onboard keys. If you (or some malicious outsider) enters the user PIN wrong three times, the card is locked, and the Admin PIN is needed to unlock it. If you use a GSM cellphone, this is somewhat like your SIM card's PIN and PUK codes. Entering an incorrect admin PIN three times destroys the card. You probably want to avoid that.
 
-The admin PIN isn't used every day, and you only need it to reconfigure the card or fix it if you mess up your PIN. It doesn't need to be something you can remember, just find when all else fails. It's probably a good idea to use the longest admin PIN your card accepts (in this example, 32 digits long). You should probably write the admin PIN down a text file on your master key cold storage and backup disks.
+The admin PIN isn't used every day, and you only need it to reconfigure the card or fix it if you mess up your PIN. It doesn't need to be something you can remember, just find when all else fails. It's probably a good idea to use the longest admin PIN your card accepts (in this example, 32 digits long). You should probably write the admin PIN down in a text file on your master key cold storage and backup disks.
 
 ~~~~~
 Your selection? 3
@@ -513,7 +513,7 @@ Manufacturer .....: ZeitControl
 Serial number ....: 00000101
 Name of cardholder: Ada Lovelace
 Language prefs ...: en
-Sex ..............: unspecified
+Sex ..............: F
 URL of public key : https://enchantressofnumbers.net/key.asc
 Login data .......: ada
 Private DO 1 .....: [not set]
@@ -539,12 +539,12 @@ The Key Editor
 amnesia@amnesia:~$ gpg --edit-key CDCD72AF
 Secret key is available.
 
-pub  3072R/CDCD72AF  created: 2063-04-06  expires: 2063-04-06  usage: SC   
+pub  3072R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06  usage: SC   
                      trust: unknown       validity: unknown
 [ unknown] (1). Ada Lovelace <ada@enchantressofnumbers.net>
 ~~~~~
 
-This is GPG's key-editing setup, and there are lots of things you can do from here. There are loads of commands, and you can see them all if you ask for some `help`. Let's walk through what you're being shown here then put your master key on a smartcard.
+This is GPG's key-editing setup, and there are lots of things you can do from here. There are loads of commands, and you can see them all if you ask for some `help`. Let's walk through what you're being shown here and then put your master key on a smartcard.
 
 "Secret key is available." means exactly what it says on the tin. It's possible to use the `edit-key` command when you *don't* have the secret key available, but anything that requires the secret key won't work, obviously.
 
@@ -557,18 +557,18 @@ The next line is the key's UID. There's just one, but it has a little `(1)` besi
 Smartcard Export
 ----------------
 
-Your smartcard is ready for use and it's time to move your master key over. When you move a key to a smartcard, GPG deletes that private key from your keyring, and replaces it with a a stub noting that the key is actually on a particular smartcard. That's how GPG knows to prompt you for a card rather than just assuming that the key is unusable without its private parts.
+Your smartcard is ready for use and it's time to move your master key over. When you move a key to a smartcard, GPG deletes that private key from your keyring, and replaces it with a stub noting that the key is actually on a particular smartcard. That's how GPG knows to prompt you for a card rather than just assuming that the key is unusable without its private parts.
 
 First we need to toggle to the secret key listing.
 
 ~~~~~
 gpg> toggle
 
-sec  4096R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06
+sec  3072R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06
 (1)  Ada Lovelace <ada@enchantressofnumbers.net>
 ~~~~~
 
-Then we send it to the card. This can't be undone! Make sure that you've already made your backups, because there's no way to get the secret key back once you've sent it to the card. It sure would be a pity to go to all this trouble only to break the card in a freak balooning accident.
+Then we send it to the card. This can't be undone! Make sure that you've already made your backups, because there's no way to get the secret key back once you've sent it to the card. It sure would be a pity to go to all this trouble only to break the card in a freak ballooning accident.
 
 ~~~~~
 gpg> keytocard
@@ -593,12 +593,12 @@ Your selection? 1
 GPG will prompt you for your passphrase then the card's admin PIN. Do try to enter them correctly. If you do, you should see something like this:
 
 ~~~~~
-sec  4096R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06
+sec  3072R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06
                      card-no: 0005 00000101
 (1)  Ada Lovelace <ada@enchantressofnumbers.net>
 ~~~~~
 
-That little note with the card number means that GPG knows that the key is stores on the smartcard. Success! Save your changes and quit.
+That little note with the card number means that GPG knows that the key is stored on the smartcard. Success! Save your changes and quit.
 
 `gpg> save`
 
@@ -613,7 +613,7 @@ We have a master key on a smartcard. Fantastic. Now it's time to to generate som
 ~~~~~
 Secret key is available.
 
-pub  4096R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06  usage: SC   
+pub  3072R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06  usage: SC   
                      trust: unknown       validity: unknown
 [ unknown] (1). Ada Lovelace <ada@enchantressofnumbers.net>
 
@@ -679,7 +679,7 @@ Subkey Type, Capabilities, & Size
 
 `gpg> addkey`
 
-Once you type in your passprase, GPG gives us the full list of options since we're in `expert` mode again.
+Once you type in your passphrase, GPG gives us the full list of options since we're in `expert` mode again.
 
 ~~~~~
 Please select what kind of key you want:
@@ -751,7 +751,7 @@ Key is valid for? (0)
 
 Unlike a master key which is rather a hassle to replace, you can rotate subkeys relatively regularly by generating new ones and revoking the old ones. Other folks who update your key from a keyserver should be able to switch over to the new one without even noticing that they did. This is more difficult if you choose not to use keyservers. 
 
-Since you're using a smartcard, you might not want your subkeys to expire: you can just keep using them until something goes wrong, and generate new ones then. If you're not using a smartcard, you might want to pick a reasonable expiry period. You have use your master key  to change subkeys, so you might want to make it a large fraction of your master key expiry period, and take that opportunity to rotate subkeys and postpone your master key's expiration at the same time.
+Since you're using a smartcard, you might not want your subkeys to expire: you can just keep using them until something goes wrong, and generate new ones then. If you're not using a smartcard, you might want to pick a reasonable expiry period. You have to use your master key to change subkeys, so you might want to make it a large fraction of your master key expiry period, and take that opportunity to rotate subkeys and postpone your master key's expiration at the same time.
 
 ~~~~~
 Key is valid for? (0) 
@@ -768,7 +768,7 @@ Repeat
 Now we've got a subkey that can `Sign`. Repeat these steps two more times to generate an `Encrypt` and an `Authenticate` subkey, and you should get something that looks like this.
 
 ~~~~~
-pub  4096R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06  usage: SC   
+pub  3072R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06  usage: SC   
                      trust: unknown       validity: unknown
 sub  3072R/FACBBB45  created: 2063-04-06  expires: never       usage: S   
 sub  3072R/8FE97F11  created: 2063-04-06  expires: never       usage: E   
@@ -805,9 +805,9 @@ If you quit without saving, all your changes in this session will be discarded.
 Subkey Backup
 -------------
 
-Our subkeys are ready, so let's back them up. Just like the master key, if we ever break or loose the smartcard they're stored on, it'd be nice to be able to restore them so we can still decrypt older messages. We also might one day want to change subkeys, and this backup allows us to re-use their smartcard, rather than having to keep it forever because it's the only copy of the subkeys.
+Our subkeys are ready, so let's back them up. Just like the master key, if we ever break or lose the smartcard they're stored on, it'd be nice to be able to restore them so we can still decrypt older messages. We also might one day want to change subkeys, and this backup allows us to re-use their smartcard, rather than having to keep it forever because it's the only copy of the subkeys.
 
-When we export our secret-keys now, GPG will export the sub of our master key (with a note that it's on a smartcard), and the full private parts of our subkeys.
+When we export our secret-keys now, GPG will export the stub of our master key (with a note that it's on a smartcard), and the full private parts of our subkeys.
 
 ~~~~
 amnesia@amnesia:~$ gpg --armor --output /media/cold-storage/ada-master_stub+secret-subkeys.gpg --export-secret-keys CDCD72AF
@@ -872,7 +872,7 @@ ssb  3072R/94C86525  created: 2063-04-06  expires: never
 (3)  [jpeg image of size 27348]
 ~~~~~
 
-Notice how the signing subkey key now has a little star beside it? That's means it's selected.
+Notice how the signing subkey now has a little star beside it? That means it's selected.
 
 ~~~~~
 gpg> keytocard
@@ -890,7 +890,7 @@ Your selection? 1
 Now repeat this for the other two subkeys. Make sure to put them in the right slots on the card. When you're done, the secret key view should look like this.
 
 ~~~~~
-sec  4096R/CDCD72AF  created: 2063-04-06  expires: 2063-04-06
+sec  3072R/CDCD72AF  created: 2063-04-06  expires: 2063-10-06
                      card-no: 0005 00000101
 ssb  3072R/FACBBB45  created: 2063-04-06  expires: never     
                      card-no: 0005 00000102
@@ -941,9 +941,9 @@ Revocation Certificates
 
 Now's a perfectly good time to generate a revocation certificate. You might want to put this on your everyday machine, or you might want to print it out. A revocation certificate allows you to cancel your key without needing to have the secret part on hand (you used the secret part to create the certificate).
 
-A jerk who got a hold of a revocation certificate for your key could also cancel your key (which would probably make a lot of work for you), but they couldn't sign things on your behalf, or decrypt secret messages meant only for you.
+A jerk who got ahold of a revocation certificate for your key could also cancel your key (which would probably make a lot of work for you), but they couldn't sign things on your behalf, or decrypt secret messages meant only for you.
 
-This probably means that you should store your revocation certificate somewhere other than where you store your master key backus, and just a little more accessible, so that even if you loose those backups, you can still revoke the key.
+This probably means that you should store your revocation certificate somewhere other than where you store your master key backups, and just a little more accessible, so that even if you lose those backups, you can still revoke the key.
 
 Here's how to make one.
 
@@ -984,7 +984,7 @@ We're done with key generation now. If you've been following through all the ste
 * everyday usb
 * print share
 
-The cold storage and key-bakup disks should have a full copy of the public and private parts of your master key and all your subkeys. Put these in your home safe or your piggy bank, or wherever you keep things safely. They should contain five files:
+The cold storage and key-backup disks should have a full copy of the public and private parts of your master key and all your subkeys. Put these in your home safe or your piggy bank, or wherever you keep things safely. They should contain five files:
 
 * `keyid_private.gpg`: the private part of your master key
 * `keyid_public.gpg`: the public part of your master key
@@ -1074,7 +1074,7 @@ Don't worry if you see a warning about time warps or clock problems. It probably
 
 It's also notable that things look a little different here. Instead of that short 8-character keyID, we have a longer 16-character one. That's because the display options in `gpg.conf`. It's always better to use longer keyIDs, they're harder to spoof. You should copy and paste this long keyID into your `gpg.conf` where there's a space for it.
 
-If you want to, you gan `gpg --edit-key 4771324ACDCD72AF` and check that you can `toggle` to see that your everyday machine knows about the smartcards.
+If you want to, you can `gpg --edit-key 4771324ACDCD72AF` and check that you can `toggle` to see that your everyday machine knows about the smartcards.
 
 Uploading to a keyserver
 ------------------------
@@ -1100,6 +1100,7 @@ pub   3072R/0x4771324ACDCD72AF 2063-04-06 [expires: 2063-10-06]
 uid                 [ultimate] Ada Lovelace <ada@enchantressofnumbers.net>
 uid                 [ultimate] Ada Lovelace <ada@analyticalengine.com>
 uid                 [ultimate] [jpeg image of size 27348]
-sub   3072R/0x8E550EC9FACBBB45 2014-02-13
-sub   3072R/0xCA1659C68FE97F11 2014-02-13
-sub   3072R/0xE9D0F1F494C86525 2014-02-13
+sub   3072R/0x8E550EC9FACBBB45 2063-04-06
+sub   3072R/0xCA1659C68FE97F11 2063-04-06
+sub   3072R/0xE9D0F1F494C86525 2063-04-06
+~~~~
