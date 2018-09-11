@@ -407,6 +407,8 @@ Admin commands are allowed
 Authorization PINs
 ------------------
 
+Before setting up the PINs for your smartcard, it is important to have a safe place to store them. A password manager may help you generate, store _(and label)_ each of the three PINs (admin PIN, user PIN, and reset code) we'll be setting up. Some of the commands we'll be using may "time out" abruptly and force you to start over in entering a new PIN if you take slightly too long to type it, so it is recommended that you choose what these three PINs will be ahead of time. A password manager will help you do that.
+
 The default user PIN is `123456` and the default admin PIN is `12345678`. Let's start by changing these.
 
 ~~~~~
